@@ -1590,10 +1590,21 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
 			                <DiagnosisTitle>病理报告</DiagnosisTitle>
 			                <DiagnosisConclusion>{GetXmlStr(jcxx.F_BLZD)}</DiagnosisConclusion>
 			                <DiagnosisTime>{GetXmlStr(jcxx.F_BGRQ)+":00"}</DiagnosisTime>
-			                <DiagnosisCode></DiagnosisCode>
+			                <DiagnosisCode>gc</DiagnosisCode>
 			                <DiagnosisCodesystem></DiagnosisCodesystem>
 			                <DiagnosisPerformer>
-				                <PerformerName>{GetXmlStr(jcxx.F_FZYS)}</PerformerName>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(jcxx.F_BGYS)}</PerformerName>
+                                    <PerformerTypeCode>cg_czys</PerformerTypeCode>
+                                </Performer>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(jcxx.F_FZYS)}</PerformerName>
+                                    <PerformerTypeCode>cg_fzys</PerformerTypeCode>
+                                </Performer>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(jcxx.F_SHYS)}</PerformerName>
+                                    <PerformerTypeCode>cg_shys</PerformerTypeCode>
+                                </Performer>
 			                </DiagnosisPerformer>
 		                </SubDiagnosis> ";
 
@@ -1602,10 +1613,13 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
 			                <DiagnosisTitle>肉眼所见</DiagnosisTitle>
 			                <DiagnosisConclusion>{GetXmlStr(jcxx.F_RYSJ)}</DiagnosisConclusion>
 			                <DiagnosisTime>{GetXmlStr(jcxx.F_BGRQ) + ":00"}</DiagnosisTime>
-			                <DiagnosisCode></DiagnosisCode>
+			                <DiagnosisCode>cg_rysj</DiagnosisCode>
 			                <DiagnosisCodesystem></DiagnosisCodesystem>
 			                <DiagnosisPerformer>
-				                <PerformerName>{GetXmlStr(jcxx.F_FZYS)}</PerformerName>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(jcxx.F_QCYS)}</PerformerName>
+                                    <PerformerTypeCode>cg_qcys</PerformerTypeCode>
+                                </Performer>
 			                </DiagnosisPerformer>
 		                </SubDiagnosis> ";
 
@@ -1619,10 +1633,21 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
 			                <DiagnosisTitle>补充报告[{bcbg.F_BC_BGXH}]</DiagnosisTitle>
 			                <DiagnosisConclusion>{GetXmlStr(bcbg.F_BCZD)}</DiagnosisConclusion>
 			                <DiagnosisTime>{GetXmlStr(bcbg.F_BC_BGRQ)}</DiagnosisTime>
-			                <DiagnosisCode></DiagnosisCode>
+			                <DiagnosisCode>bc</DiagnosisCode>
 			                <DiagnosisCodesystem></DiagnosisCodesystem>
 			                <DiagnosisPerformer>
-				                <PerformerName>{GetXmlStr(bcbg.F_BC_SHYS)}</PerformerName>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(bcbg.F_BC_BGYS)}</PerformerName>
+                                    <PerformerTypeCode>bc_czys</PerformerTypeCode>
+                                </Performer>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(bcbg.F_BC_FZYS)}</PerformerName>
+                                    <PerformerTypeCode>bc_fzys</PerformerTypeCode>
+                                </Performer>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(bcbg.F_BC_SHYS)}</PerformerName>
+                                    <PerformerTypeCode>bc_shys</PerformerTypeCode>
+                                </Performer>
 			                </DiagnosisPerformer>
 		                </SubDiagnosis> ";
             }
@@ -1634,11 +1659,22 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
 			                <DiagnosisTitle>冰冻报告[{bdbg.F_BD_BGXH}]</DiagnosisTitle>
 			                <DiagnosisConclusion>{GetXmlStr(bdbg.F_BDZD)}</DiagnosisConclusion>
 			                <DiagnosisTime>{GetXmlStr(bdbg.F_BD_BGRQ)}</DiagnosisTime>
-			                <DiagnosisCode></DiagnosisCode>
+			                <DiagnosisCode>bd</DiagnosisCode>
 			                <DiagnosisCodesystem></DiagnosisCodesystem>
 			                <DiagnosisPerformer>
-				                <PerformerName>{GetXmlStr(bdbg.F_BD_SHYS)}</PerformerName>
-			                </DiagnosisPerformer>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(bdbg.F_BD_BGYS)}</PerformerName>
+                                    <PerformerTypeCode>bd_czys</PerformerTypeCode>
+                                </Performer>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(bdbg.F_BD_FZYS)}</PerformerName>
+                                    <PerformerTypeCode>bd_fzys</PerformerTypeCode>
+                                </Performer>	
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(bdbg.F_BD_SHYS)}</PerformerName>
+                                    <PerformerTypeCode>bd_shys</PerformerTypeCode>
+                                </Performer>	
+                            </DiagnosisPerformer>
 		                </SubDiagnosis> ";
 
                 xml += $@"		                        
@@ -1646,11 +1682,14 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
 			                <DiagnosisTitle>肉眼所见(冰冻)</DiagnosisTitle>
 			                <DiagnosisConclusion>{GetXmlStr(bdbg.F_bd_rysj)}</DiagnosisConclusion>
 			                <DiagnosisTime>{GetXmlStr(bdbg.F_BD_BGRQ)}</DiagnosisTime>
-			                <DiagnosisCode></DiagnosisCode>
+			                <DiagnosisCode>bdrysj</DiagnosisCode>
 			                <DiagnosisCodesystem></DiagnosisCodesystem>
 			                <DiagnosisPerformer>
-				                <PerformerName>{GetXmlStr(bdbg.F_BD_SHYS)}</PerformerName>
-			                </DiagnosisPerformer>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(bdbg.F_BD_QCYS)}</PerformerName>
+                                    <PerformerTypeCode>bd_qcys</PerformerTypeCode>
+                                </Performer>
+                            </DiagnosisPerformer>
 		                </SubDiagnosis> ";
             }
             return xml;
