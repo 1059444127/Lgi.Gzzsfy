@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.www.gzsums.net/" xmlns:ns1="http://www.gzsums.net//esb/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://schemas.xmlsoap.org/soap/http" name="MessageRouteServiceSoapImplService" targetNamespace="http://ws.www.gzsums.net/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://www.gzsums.net//esb/" location="http://168.168.252.112:14112/notice-server/services/MessageRouteServiceSoap?wsdl=MessageRouteServiceSoap.wsdl" />
+  <wsdl:types />
+  <wsdl:binding name="MessageRouteServiceSoapImplServiceSoapBinding" type="ns1:MessageRouteServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getProgressNoteRec">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getProgressNoteRec">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getProgressNoteRecResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendMessageAsync">
+      <soap:operation soapAction="http://www.gzsums.net//esb/sendMessageAsync" style="document" />
+      <wsdl:input name="sendMessageAsync">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendMessageAsyncResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendMessageSync">
+      <soap:operation soapAction="http://www.gzsums.net//esb/sendMessageSync" style="document" />
+      <wsdl:input name="sendMessageSync">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendMessageSyncResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessageRouteServiceSoapImplService">
+    <wsdl:port name="MessageRouteServiceSoapImplPort" binding="tns:MessageRouteServiceSoapImplServiceSoapBinding">
+      <soap:address location="http://168.168.252.112:14112/notice-server/services/MessageRouteServiceSoap" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

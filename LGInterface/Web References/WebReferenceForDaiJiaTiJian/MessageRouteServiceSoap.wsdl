@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.gzsums.net//esb/" xmlns:ns2="http://esb.www.gzsums.net" name="MessageRouteServiceSoap" targetNamespace="http://www.gzsums.net//esb/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns:tns="http://www.gzsums.net//esb/" elementFormDefault="qualified" targetNamespace="http://www.gzsums.net//esb/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="sendMessageAsync">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="req" type="tns:Request" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendMessageAsyncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sendMessageAsyncResult" type="tns:Response" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendMessageSync">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="req" type="tns:Request" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendMessageSyncResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sendMessageSyncResult" type="tns:Response" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="Request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="requestHeader" type="tns:RequestHeader" />
+          <xs:element minOccurs="0" name="requestBody" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RequestHeader">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="sender" type="xs:string" />
+          <xs:element minOccurs="0" name="receiver" type="xs:string" />
+          <xs:element minOccurs="0" name="requestTime" type="xs:string" />
+          <xs:element minOccurs="0" name="msgType" type="xs:string" />
+          <xs:element minOccurs="0" name="msgId" type="xs:string" />
+          <xs:element minOccurs="0" name="msgPriority" type="xs:string" />
+          <xs:element minOccurs="0" name="msgVersion" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="responseHeader" type="tns:ResponseHeader" />
+          <xs:element minOccurs="0" name="responseBody" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResponseHeader">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="sender" type="xs:string" />
+          <xs:element minOccurs="0" name="receiver" type="xs:string" />
+          <xs:element minOccurs="0" name="responseTime" type="xs:string" />
+          <xs:element minOccurs="0" name="msgType" type="xs:string" />
+          <xs:element minOccurs="0" name="msgId" type="xs:string" />
+          <xs:element minOccurs="0" name="errCode" type="xs:string" />
+          <xs:element minOccurs="0" name="errMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="msgPriority" type="xs:string" />
+          <xs:element minOccurs="0" name="msgVersion" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://esb.www.gzsums.net" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.gzsums.net//esb/" />
+      <xs:element name="getProgressNoteRec">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element form="qualified" name="req" type="ns1:Request" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getProgressNoteRecResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element form="qualified" name="getProgressNoteRecReturn" type="ns1:Response" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getProgressNoteRecResponse">
+    <wsdl:part name="parameters" element="ns2:getProgressNoteRecResponse" />
+  </wsdl:message>
+  <wsdl:message name="getProgressNoteRec">
+    <wsdl:part name="parameters" element="ns2:getProgressNoteRec" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageAsyncResponse">
+    <wsdl:part name="parameters" element="ns1:sendMessageAsyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageAsync">
+    <wsdl:part name="parameters" element="ns1:sendMessageAsync" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageSyncResponse">
+    <wsdl:part name="parameters" element="ns1:sendMessageSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendMessageSync">
+    <wsdl:part name="parameters" element="ns1:sendMessageSync" />
+  </wsdl:message>
+  <wsdl:portType name="MessageRouteServiceSoap">
+    <wsdl:operation name="getProgressNoteRec">
+      <wsdl:input name="getProgressNoteRec" message="ns1:getProgressNoteRec" />
+      <wsdl:output name="getProgressNoteRecResponse" message="ns1:getProgressNoteRecResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendMessageAsync">
+      <wsdl:input name="sendMessageAsync" message="ns1:sendMessageAsync" />
+      <wsdl:output name="sendMessageAsyncResponse" message="ns1:sendMessageAsyncResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendMessageSync">
+      <wsdl:input name="sendMessageSync" message="ns1:sendMessageSync" />
+      <wsdl:output name="sendMessageSyncResponse" message="ns1:sendMessageSyncResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

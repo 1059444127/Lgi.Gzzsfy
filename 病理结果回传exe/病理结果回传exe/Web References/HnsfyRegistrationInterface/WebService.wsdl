@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QuePatiengInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IDCard" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Extype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DepartMentID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InpatientNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OutpatientNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Invoicenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OperationType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QuePatiengInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QuePatiengInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QuePatiengInfoByXML">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QuePatiengInfoByXMLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QuePatiengInfoByXMLResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckFeeOperation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="registeredserialnumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operatorid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="departmentid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="datime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckFeeOperationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckFeeOperationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckFeeOperationByInvoicenumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Invoicenumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operatorid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="departmentid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="datime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckFeeOperationByInvoicenumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckFeeOperationByInvoicenumberResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancellationFee">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="prescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operatorid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="departmentid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="datime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancellationFeeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CancellationFeeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="QuePatiengInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:QuePatiengInfo" />
+  </wsdl:message>
+  <wsdl:message name="QuePatiengInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:QuePatiengInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="QuePatiengInfoByXMLSoapIn">
+    <wsdl:part name="parameters" element="tns:QuePatiengInfoByXML" />
+  </wsdl:message>
+  <wsdl:message name="QuePatiengInfoByXMLSoapOut">
+    <wsdl:part name="parameters" element="tns:QuePatiengInfoByXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckFeeOperationSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckFeeOperation" />
+  </wsdl:message>
+  <wsdl:message name="CheckFeeOperationSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckFeeOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckFeeOperationByInvoicenumberSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckFeeOperationByInvoicenumber" />
+  </wsdl:message>
+  <wsdl:message name="CheckFeeOperationByInvoicenumberSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckFeeOperationByInvoicenumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="CancellationFeeSoapIn">
+    <wsdl:part name="parameters" element="tns:CancellationFee" />
+  </wsdl:message>
+  <wsdl:message name="CancellationFeeSoapOut">
+    <wsdl:part name="parameters" element="tns:CancellationFeeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QuePatiengInfo">
+      <wsdl:input message="tns:QuePatiengInfoSoapIn" />
+      <wsdl:output message="tns:QuePatiengInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QuePatiengInfoByXML">
+      <wsdl:input message="tns:QuePatiengInfoByXMLSoapIn" />
+      <wsdl:output message="tns:QuePatiengInfoByXMLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckFeeOperation">
+      <wsdl:input message="tns:CheckFeeOperationSoapIn" />
+      <wsdl:output message="tns:CheckFeeOperationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckFeeOperationByInvoicenumber">
+      <wsdl:input message="tns:CheckFeeOperationByInvoicenumberSoapIn" />
+      <wsdl:output message="tns:CheckFeeOperationByInvoicenumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CancellationFee">
+      <wsdl:input message="tns:CancellationFeeSoapIn" />
+      <wsdl:output message="tns:CancellationFeeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QuePatiengInfo">
+      <soap:operation soapAction="http://tempuri.org/QuePatiengInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QuePatiengInfoByXML">
+      <soap:operation soapAction="http://tempuri.org/QuePatiengInfoByXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckFeeOperation">
+      <soap:operation soapAction="http://tempuri.org/CheckFeeOperation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckFeeOperationByInvoicenumber">
+      <soap:operation soapAction="http://tempuri.org/CheckFeeOperationByInvoicenumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancellationFee">
+      <soap:operation soapAction="http://tempuri.org/CancellationFee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QuePatiengInfo">
+      <soap12:operation soapAction="http://tempuri.org/QuePatiengInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QuePatiengInfoByXML">
+      <soap12:operation soapAction="http://tempuri.org/QuePatiengInfoByXML" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckFeeOperation">
+      <soap12:operation soapAction="http://tempuri.org/CheckFeeOperation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckFeeOperationByInvoicenumber">
+      <soap12:operation soapAction="http://tempuri.org/CheckFeeOperationByInvoicenumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancellationFee">
+      <soap12:operation soapAction="http://tempuri.org/CancellationFee" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="http://192.168.0.51:8090/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="http://192.168.0.51:8090/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

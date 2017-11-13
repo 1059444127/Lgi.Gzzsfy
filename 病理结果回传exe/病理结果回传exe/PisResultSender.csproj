@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6A4FE443-846D-45A9-92A1-3FED9340A8C1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SendPisResult</RootNamespace>
+    <AssemblyName>PathHISJK_fz</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="dbbase, Version=1.8.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\dbbase.dll</HintPath>
+    </Reference>
+    <Reference Include="Lg.Pdf2Jpg, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Lg.Pdf2Jpg.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\DbHelper.cs" />
+    <Compile Include="DAL\T_BCBG_DAL.cs" />
+    <Compile Include="DAL\T_BDBG_DAL.cs" />
+    <Compile Include="DAL\T_JCXX_DAL.cs" />
+    <Compile Include="DAL\T_QCMX_DAL.cs" />
+    <Compile Include="DAL\T_QP_DAL.cs" />
+    <Compile Include="DAL\T_TX_DAL.cs" />
+    <Compile Include="FtpWeb.cs" />
+    <Compile Include="ISendPisResult\HospNameAttribute.cs" />
+    <Compile Include="ISendPisResult\Impl\TestSender.cs" />
+    <Compile Include="ISendPisResult\Impl\广州中山附一_上海岱嘉\FtpHelper.cs" />
+    <Compile Include="ISendPisResult\Impl\广州中山附一_上海岱嘉\ResultSender.cs" />
+    <Compile Include="ISendPisResult\Impl\湖南省妇幼医院_广州邦弘\ApplicationSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ISendPisResult\Impl\湖南省妇幼医院_广州邦弘\ApplicationSelector.designer.cs">
+      <DependentUpon>ApplicationSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ISendPisResult\Impl\湖南省妇幼医院_广州邦弘\湖南省妇幼医院_广州邦弘.cs" />
+    <Compile Include="ISendPisResult\ISendPisResult.cs" />
+    <Compile Include="log.cs" />
+    <Compile Include="ISendPisResult\PisResultSenderFactory.cs" />
+    <Compile Include="Models\T_BCBG.cs" />
+    <Compile Include="Models\T_BDBG.cs" />
+    <Compile Include="Models\T_QCMX.cs" />
+    <Compile Include="Models\T_QP.cs" />
+    <Compile Include="Models\T_TX.cs" />
+    <Compile Include="Models\T_JCXX.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="readini.cs" />
+    <Compile Include="Util\Loaddll.cs" />
+    <Compile Include="Util\DateTimeHelper.cs" />
+    <Compile Include="Util\OdbcOracleHelper.cs" />
+    <Compile Include="Util\TrimHelper.cs" />
+    <Compile Include="Util\ZgqClass.cs" />
+    <Compile Include="Web References\HnsfyOutInterface\Reference.cs" />
+    <Compile Include="Web References\HnsfyRegistrationInterface\Reference.cs" />
+    <Compile Include="Web References\WebReferenceCrisis\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ISendPisResult\Impl\湖南省妇幼医院_广州邦弘\ApplicationSelector.resx">
+      <DependentUpon>ApplicationSelector.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="logfrm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="sz.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Web References\HnsfyOutInterface\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\HnsfyOutInterface\item0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\HnsfyOutInterface\Reference.map" />
+    <None Include="Web References\HnsfyOutInterface\ServiceForward.wsdl" />
+    <None Include="Web References\HnsfyRegistrationInterface\Reference.map" />
+    <None Include="Web References\HnsfyRegistrationInterface\WebService.wsdl" />
+    <None Include="Web References\WebReferenceCrisis\CrisisValue.wsdl" />
+    <None Include="Web References\WebReferenceCrisis\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebReferenceCrisis\Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://168.168.252.104:8888/CrisisValue%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WebReferenceCrisis\</RelPath>
+      <UpdateFromURL>http://168.168.252.104:8888/CrisisValue%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>PathHISJK_fz_WebReferenceCrisis_CrisisValue</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web References\HnsfyOutInterface\item.disco" />
+    <Content Include="Web References\HnsfyRegistrationInterface\WebService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADODB">
+      <Guid>{00000206-0000-0010-8000-00AA006D2EA4}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="zlPacsInterface">
+      <Guid>{EB5A76FB-EF9C-4C53-A9D9-8712805CCDA0}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

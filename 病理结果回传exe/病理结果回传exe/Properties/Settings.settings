@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SendPisResult.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SendResult_HnsfyOutInterface_ServiceForward" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.168.0.51:9200/BVOutInterface/Soap</Value>
+    </Setting>
+    <Setting Name="SendResult_HnsfyRegistrationInterface_ServiceForward" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.168.0.51:8090/WebService.asmx</Value>
+    </Setting>
+    <Setting Name="PathHISJK_fz_WebReferenceCrisis_CrisisValue" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://168.168.252.104:8888/CrisisValue</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

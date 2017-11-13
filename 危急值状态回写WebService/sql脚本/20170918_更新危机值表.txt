@@ -1,0 +1,26 @@
+ALTER TABLE [dbo].[T_WJZZT] DROP CONSTRAINT [DF_T_WJZZT_F_SDSJ]
+GO
+
+/****** Object:  Table [dbo].[T_WJZZT]    Script Date: 2017-09-18 10:36:33 ******/
+DROP TABLE [dbo].[T_WJZZT]
+GO
+
+/****** Object:  Table [dbo].[T_WJZZT]    Script Date: 2017-09-18 10:36:33 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[T_WJZZT](
+	[f_blh] [nvarchar](500) NOT NULL,
+	[f_sqxh] [nvarchar](500) NULL,
+	[f_zt] [nvarchar](500) NULL,
+	[f_jg] [nvarchar](500) NULL,
+	[F_SDSJ] [smalldatetime] NOT NULL,
+	[f_nr] [nvarchar](1500) NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[T_WJZZT] ADD  CONSTRAINT [DF_T_WJZZT_F_SDSJ]  DEFAULT (getdate()) FOR [F_SDSJ]
+GO

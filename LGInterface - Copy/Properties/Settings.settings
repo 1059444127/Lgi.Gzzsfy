@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LGInterface.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LGInterface_GuangZhouZhongShan1St_RequestNote" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://168.168.252.112:4463/RequestNote</Value>
+    </Setting>
+    <Setting Name="LGInterface_WebReferenceForDaiJiaTiJian_MessageRouteServiceSoapImplService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://168.168.252.112:14112/notice-server/services/MessageRouteServiceSoap</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

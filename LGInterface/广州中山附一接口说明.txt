@@ -1,0 +1,110 @@
+﻿接口说明:
+通过申请单号,门诊号或者住院号获取病人申请单
+1.本接口先从WebService读取电子申请单,如果找不到就去视图找患者信息.
+2.电子申请单包含项目信息,送检部位.
+3.暂时不需要回写读取状态.
+
+--------------------------------------------------------
+//2017年11月13日
+	1.通过平台获取申请单时,增加特殊规则:当是门诊 +特诊+科室不是内镜中心（代码7100）的科室，送检科室全部匹配成特诊门诊，因为这部分报告是需要送到特诊门诊中心的。
+
+//2017年10月30日
+改动:
+	1.解决回传xml里面逗号被替换成chr(39)的bug.
+	2.增加回传手术间,写到f_zy字段,只支持从平台获取的申请单.
+	3.增加审核时生成pdf
+	4.增加根据送检科室,将检查部位和标本名称对调的功能.
+
+sz.ini:	
+	[savetohis]
+	//生成pdf
+	ispdf=1
+	//有些送检科室的标本部位和取材名称写反了,需要特殊处理,用 | 隔开
+	对换取材部位和名称的科室列表 = 
+
+	//生成PDF需要改这里
+	[sqlserver]
+	Server=168.168.253.34
+	DataBase=pathnet
+	UserID=pathnet
+	PassWord=4s3c2a1p
+
+//2017年10月30日 之前
+
+	[广州中山附一]
+	#0否 1是
+	是否读取标本信息=0  
+	#连接HIS视图的ODBC地址
+	#数据库版本：Oracle 11G
+	#实例：168.168.252.119:1521/hiup
+	ODBC连接串=DSN=gzzs1stHIS;UID=HPIS;PWD=HPIS;
+
+	#连接HIS视图的ODBC地址
+	#数据库版本：Oracle 11G
+	#实例：168.168.252.119:1521/hiup
+	ODBC报告回传=DSN=gzzs1stAPGate;UID=pis_gate;PWD=pis_gate;
+
+	[ftp]
+	ftp=1
+	user=ftp
+	pwd=ftp
+	md=0
+	ftplocal=c:\temp
+	ftpip=127.0.0.1
+
+	[ftpup]
+	ftp=1
+	user=168.160.76.102\pisimage
+	pwd=blimage
+	md=0
+	ftplocal=c:\temp
+	ftpip=168.160.76.102
+
+
+	[ftpup2]
+	ftp=1
+	user=168.160.76.102\pisimage
+	pwd=blimage
+	md=0
+	ftplocal=c:\temp
+	ftpip=168.160.76.102
+
+2.视图ODBC配置:
+	数据库版本：Oracle 11G
+	实例：168.168.252.119:1521/hiup
+	申请单获取:
+	在windows增加Microsoft ODBC for Oracle,DSN=gzzs1stHIS;UID=PHIS;Server=168.168.252.119:1521/hiup
+	报告回传:
+	在windows增加Microsoft ODBC for Oracle,DSN=gzzs1stAPGate;UID=pis_gate;PWD=pis_gate;Server=168.168.252.119:1521/hiup
+
+3.WebService配置:
+	配置文件:Properties\Settings.Designer.cs
+	配置位置:
+        [global::System.Configuration.DefaultSettingValueAttribute("http://168.168.252.112:4463/RequestNote")]
+        public string LGInterface_GuangZhouZhongShan1St_RequestNote {
+            get {
+                return ((string)(this["LGInterface_GuangZhouZhongShan1St_RequestNote"]));
+            }
+        }	
+	正式接口地址：http://168.168.252.112:4463/RequestNote
+	测试接口地址：http://168.168.78.105:4464/RequestNote
+	测试申请单号：10001143、20011288
+	##门诊患者查询:
+	select * from ats_guest.V_MEC_OUTPATIENTINFO where MZH='0020406269' and YXBZ='1' 
+	##住院患者查询:
+	select * from ats_guest.INPATIENT  where 1=1 and PATIENT_NO='0001170018'
+
+4.报告回传
+	通过ODBC回传到对方Oracle前置机(上面已配置)
+	通过Ftp回传图片和xml报告文件
+	*ftp配置:
+	用户：168.160.76.102\pisimage
+	密码：blimage 
+	
+
+--------------------------------------------------------
+
+	负责人:
+	长沙朗珈 刘冬阳
+	电话:17308483446
+	QQ:41411952

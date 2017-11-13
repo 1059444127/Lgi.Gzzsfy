@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions localPdfFullNamens:xsd="http://www.w3.org/2001/XMLSchema" localPdfFullNamens:soap="http://schemas.localPdfFullNamesoap.org/wsdl/soap/" localPdfFullNamens:tns="http://www.gzsums.net/crisisValue/" localPdfFullNamens:ns1="http://schemas.localPdfFullNamesoap.org/soap/http" name="CrisisValue" targetNamespace="http://www.gzsums.net/crisisValue/" localPdfFullNamens:wsdl="http://schemas.localPdfFullNamesoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://www.gzsums.net/crisisValue/" version="1.0" localPdfFullNamens:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="CrisisAdd">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="req" type="tns:Request" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CrisisAddResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="CrisisAddResult" type="tns:Response" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CrisisStatusFeedback">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="req" type="tns:Request" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CrisisStatusFeedbackResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="CrisisStatusFeedbackResult" type="tns:Response" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CrisisUpdate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="req" type="tns:Request" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CrisisUpdateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="CrisisUpdateResult" type="tns:Response" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="Request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="requestHeader" type="tns:RequestHeader" />
+          <xs:element minOccurs="0" name="requestBody" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RequestHeader">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="sender" type="xs:string" />
+          <xs:element minOccurs="0" name="receiver" type="xs:string" />
+          <xs:element minOccurs="0" name="requestTime" type="xs:string" />
+          <xs:element minOccurs="0" name="msgType" type="xs:string" />
+          <xs:element minOccurs="0" name="msgId" type="xs:string" />
+          <xs:element minOccurs="0" name="msgPriority" type="xs:string" />
+          <xs:element minOccurs="0" name="msgVersion" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="responseHeader" type="tns:ResponseHeader" />
+          <xs:element minOccurs="0" name="responseBody" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResponseHeader">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="sender" type="xs:string" />
+          <xs:element minOccurs="0" name="receiver" type="xs:string" />
+          <xs:element minOccurs="0" name="requestTime" type="xs:string" />
+          <xs:element minOccurs="0" name="msgType" type="xs:string" />
+          <xs:element minOccurs="0" name="msgId" type="xs:string" />
+          <xs:element minOccurs="0" name="msgPriority" type="xs:string" />
+          <xs:element minOccurs="0" name="msgVersion" type="xs:string" />
+          <xs:element minOccurs="0" name="errCode" type="xs:string" />
+          <xs:element minOccurs="0" name="errMessage" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="CrisisUpdateResponse">
+    <wsdl:part name="parameters" element="tns:CrisisUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrisisStatusFeedbackResponse">
+    <wsdl:part name="parameters" element="tns:CrisisStatusFeedbackResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrisisAddResponse">
+    <wsdl:part name="parameters" element="tns:CrisisAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrisisUpdate">
+    <wsdl:part name="parameters" element="tns:CrisisUpdate" />
+  </wsdl:message>
+  <wsdl:message name="CrisisAdd">
+    <wsdl:part name="parameters" element="tns:CrisisAdd" />
+  </wsdl:message>
+  <wsdl:message name="CrisisStatusFeedback">
+    <wsdl:part name="parameters" element="tns:CrisisStatusFeedback" />
+  </wsdl:message>
+  <wsdl:portType name="CrisisValueSoap">
+    <wsdl:operation name="CrisisAdd">
+      <wsdl:input name="CrisisAdd" message="tns:CrisisAdd" />
+      <wsdl:output name="CrisisAddResponse" message="tns:CrisisAddResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CrisisStatusFeedback">
+      <wsdl:input name="CrisisStatusFeedback" message="tns:CrisisStatusFeedback" />
+      <wsdl:output name="CrisisStatusFeedbackResponse" message="tns:CrisisStatusFeedbackResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CrisisUpdate">
+      <wsdl:input name="CrisisUpdate" message="tns:CrisisUpdate" />
+      <wsdl:output name="CrisisUpdateResponse" message="tns:CrisisUpdateResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CrisisValueSoapBinding" type="tns:CrisisValueSoap">
+    <soap:binding transport="http://schemas.localPdfFullNamesoap.org/soap/http" />
+    <wsdl:operation name="CrisisAdd">
+      <soap:operation soapAction="http://www.gzsums.net/crisisValue/CrisisAdd" style="document" />
+      <wsdl:input name="CrisisAdd">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CrisisAddResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrisisStatusFeedback">
+      <soap:operation soapAction="http://www.gzsums.net/crisisValue/CrisisStatusFeedback" style="document" />
+      <wsdl:input name="CrisisStatusFeedback">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CrisisStatusFeedbackResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrisisUpdate">
+      <soap:operation soapAction="http://www.gzsums.net/crisisValue/CrisisUpdate" style="document" />
+      <wsdl:input name="CrisisUpdate">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CrisisUpdateResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CrisisValue">
+    <wsdl:port name="CrisisValueSoap" binding="tns:CrisisValueSoapBinding">
+      <soap:address location="http://168.168.252.104:8888/CrisisValue" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

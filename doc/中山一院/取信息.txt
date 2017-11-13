@@ -1,0 +1,38 @@
+1.申请单信息获取接口
+见附件文档7.2.2.1病理申请单项目（RequisitionFind）
+正式接口地址：http://168.168.252.112:4463/RequestNote?wsdl
+测试接口地址：http://168.168.78.105:4464/RequestNote?wsdl
+测试申请单号：10001143、20011288
+
+2.门诊、住院患者信息视图
+数据库版本：Oracle 11G
+实例：168.168.252.119:1521/hiup
+用户密码：HPIS/HPIS 
+##门诊患者查询
+select * from ats_guest.V_MEC_OUTPATIENTINFO where MZH='0020406269' and YXBZ='1' 
+##住院患者查询
+select * from ats_guest.INPATIENT  where 1=1 and PATIENT_NO='0001170018'
+
+3.病人信息注册接口
+测试地址：
+数据库连接地址：168.168.78.108:1521/hiup
+帐号：pis_gate
+密码：pis_gate
+
+病人接收表：
+PERSON	
+PAITNET_VISIT  
+
+4.报告回传接口
+测试地址：
+数据库连接地址：168.168.78.108:1521/hiup
+帐号：pis_gate
+密码：pis_gate
+
+报告接收表：
+DGATE_DOCUMENT_INFO
+DGATE_EXTEND_ID_INFO
+
+
+ 
+ 
