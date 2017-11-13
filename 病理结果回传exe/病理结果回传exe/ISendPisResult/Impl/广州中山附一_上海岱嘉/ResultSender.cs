@@ -1682,7 +1682,7 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
 			                <DiagnosisTitle>肉眼所见(冰冻)</DiagnosisTitle>
 			                <DiagnosisConclusion>{GetXmlStr(bdbg.F_bd_rysj)}</DiagnosisConclusion>
 			                <DiagnosisTime>{GetXmlStr(bdbg.F_BD_BGRQ)}</DiagnosisTime>
-			                <DiagnosisCode>bdrysj</DiagnosisCode>
+			                <DiagnosisCode>bd_rysj</DiagnosisCode>
 			                <DiagnosisCodesystem></DiagnosisCodesystem>
 			                <DiagnosisPerformer>
                                 <Performer>
