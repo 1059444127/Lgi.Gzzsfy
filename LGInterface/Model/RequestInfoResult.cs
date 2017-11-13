@@ -176,7 +176,7 @@ namespace LGInterface.Model
         /// <summary>
         /// 特诊标识（值为82为特诊）
         /// </summary>
-        public string HTHpublic { get; set; }
+        public string HTH { get; set; }
 
         /// <summary>
         /// 主护士
