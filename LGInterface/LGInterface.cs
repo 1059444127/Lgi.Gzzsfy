@@ -158,6 +158,7 @@ namespace LGInterface
                         result.ExamList.ForEach(
                             o => bbmc = bbmc + (result.ExamList.IndexOf(o) + 1) + "." + o.qucaidengjin + "，");
                     }
+
                     bbmc = bbmc.TrimEnd('，');
                 }
 
@@ -460,14 +461,16 @@ namespace LGInterface
                 if (isSwitchDept == false)
                 {
                     exam.Description = index + "." + exam.Description;
-                    BBLB_XML = BBLB_XML + "F_BBMC=" + (char)34 + exam.Description + (char)34 + " ";
-                    BBLB_XML = BBLB_XML + "F_CQBW=" + (char)34 + exam.qucaidengjin + (char)34 + " ";
+
+                    BBLB_XML = BBLB_XML + "F_BBMC=" + (char) 34 + exam.Description + (char) 34 + " ";
+                    BBLB_XML = BBLB_XML + "F_CQBW=" + (char) 34 + exam.qucaidengjin + (char) 34 + " ";
                 }
                 else
                 {
                     exam.qucaidengjin = index + "." + exam.qucaidengjin;
-                    BBLB_XML = BBLB_XML + "F_BBMC=" + (char)34 + exam.qucaidengjin + (char)34 + " ";
-                    BBLB_XML = BBLB_XML + "F_CQBW=" + (char)34 + exam.Description + (char)34 + " ";
+
+                    BBLB_XML = BBLB_XML + "F_BBMC=" + (char) 34 + exam.qucaidengjin + (char) 34 + " ";
+                    BBLB_XML = BBLB_XML + "F_CQBW=" + (char) 34 + exam.Description + (char) 34 + " ";
                 }
                 index++;
                 BBLB_XML = BBLB_XML + "F_BZ=" + (char)34 + "" + (char)34 + " ";
