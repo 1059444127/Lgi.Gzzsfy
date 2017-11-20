@@ -266,7 +266,7 @@ namespace LGInterface
 
             //2017年11月13日 岱嘉张继松:
             //当是门诊 +特诊+科室不是内镜中心（代码7100）的科室，送检科室全部匹配成特诊门诊，因为这部分报告是需要送到特诊门诊中心的。
-            if (result != null && (result.PatientStyle == "0" && result.HTH == "82" && result.DepartMentID != "7200"))
+            if (result != null && (result.PatientStyle == "0" && result.HTH == "82" && result.DepartMentID != "7100"))
             {
                 result.DepartMent = "特诊门诊";
                 result.DepartMentID = "6160";
