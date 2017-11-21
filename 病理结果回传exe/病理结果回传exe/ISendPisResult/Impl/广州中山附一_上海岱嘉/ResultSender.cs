@@ -137,7 +137,7 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
 
                 //检查前置机中数据是否已经存在(重复审核)
                 //如果已存在,则不会重复注册病人,并且申请单和报告回传的标记是UPDATE
-                bool isExist = CheckIfReportExist(jcxx);
+                bool isExist = true;
                 string editType = isExist ? "UPDATE" : "ADD";
                 SaveReport(jcxx, editType);
 
@@ -733,17 +733,17 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
             if(string.IsNullOrEmpty(jcxx.F_SQXH.Trim())==false)
                 lstSql.Add(sqlInsertReportExtend2);
 
-            OdbcOracleHelper.ExecuteBatch(connStr,lstSql);
+//            OdbcOracleHelper.ExecuteBatch(connStr,lstSql);
 
             //xml保存到ftp            
             //pdf保存到ftp
             //图像保存到ftp
-            ftphelper.UploadRecordXml(PISReportXML, xmlDocId);
-            ftphelper.UploadPic(txList, jcxx, xmlDocId);
-            ftphelper.UploadPdf(pdfFullName,xmlDocId,jcxx);
+//            ftphelper.UploadRecordXml(PISReportXML, xmlDocId);
+//            ftphelper.UploadPic(txList, jcxx, xmlDocId);
+//            ftphelper.UploadPdf(pdfFullName,xmlDocId,jcxx);
 
-            ZgqPDFJPG zgq = new ZgqPDFJPG();
-            zgq.DelTempFile(jcxx.F_BLH);
+//            ZgqPDFJPG zgq = new ZgqPDFJPG();
+//            zgq.DelTempFile(jcxx.F_BLH);
 
             log.WriteMyLog("完成结果上传到平台,编辑类型:" + editType);
 
