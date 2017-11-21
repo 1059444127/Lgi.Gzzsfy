@@ -186,6 +186,14 @@ namespace Maticsoft.DAL
         {
             return GetList($" and F_BLH='{BLH}' ");
         }
-    }
+
+	    public T_BCBG GetByBlhAndBgxh(string pathoNo, string bgxh)
+	    {
+	        var lst = GetList($" and F_BLH='{pathoNo}' and F_BC_BGXH='{bgxh}' ");
+	        if (lst.Count > 0)
+	            return lst[0];
+	        return null;
+	    }
+	}
 }
 
