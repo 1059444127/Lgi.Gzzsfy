@@ -96,11 +96,12 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
             if (jcxx.F_MZH.Trim() + jcxx.F_ZYH.Trim() == "")
                 jcxx.F_MZH = "SGD" + jcxx.F_BLH;
 
+            log.WriteMyLog("PisAction="+pisAction+",bgzt="+jcxx.F_BGZT);
             switch (pisAction)
             {
                 case PisAction.新登记:
                 case PisAction.保存:
-                    SavePerson(jcxx);
+                    //SavePerson(jcxx);
                     SaveReport(jcxx);//判断jcxx是否已审核,已审核就会上传报告
                     break;
                 case PisAction.取消审核:
@@ -128,9 +129,9 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
             {
                 log.WriteMyLog("开始回传报告到集成平台!");
 
-//                //生成PDF并上传
-//                string base64Str = "";
-//                CreatePDF(jcxx.F_BLH,_bgxh,_reportType,false,ref base64Str,"");
+                //生成PDF并上传
+                string base64Str = "";
+                CreatePDF(jcxx.F_BLH,_bgxh,_reportType,false,ref base64Str,"");
 
                 //检查前置机中数据是否已经存在(重复审核)
                 //如果已存在,则不会重复注册病人,并且申请单和报告回传的标记是UPDATE

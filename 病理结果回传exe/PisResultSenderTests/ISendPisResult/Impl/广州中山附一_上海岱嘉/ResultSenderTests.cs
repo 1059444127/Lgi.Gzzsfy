@@ -30,7 +30,7 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉.Test
         [TestMethod()]
         public  void  CallSendResultPlus()
         {
-            var args = "201700005^cg^1^old^save";
+            var args = "N43999^bd^1^old^save";
 
             if (args.IndexOf("^") > -1)
             {
