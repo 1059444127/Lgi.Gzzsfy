@@ -30,6 +30,8 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
         dbbase.odbcdb aa = new odbcdb("DSN=pathnet;UID=pathnet;PWD=4s3c2a1p", "", "");
         private string _bgxh = "";
         private ReportType _reportType;
+        private string yhmc="";
+        private string yhbh = "";
 
         T_JCXX jcxx = null;
         T_BDBG bdbg = null;
@@ -82,6 +84,8 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
         {
             _reportType = reportType;
             _bgxh = bgxh;
+            yhmc = f.ReadString("yh", "yhmc","");
+            yhbh = f.ReadString("yh", "yhbh","");
 
             try
             {
@@ -119,7 +123,127 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
                     break;
                 default:break;
             }
-            //病人信息注册
+
+            //回传报告状态
+            SendBgzt(jcxx);
+        }
+
+        /// <summary>
+        /// 向平台回传报告转台
+        /// </summary>
+        /// <param name="jcxx"></param>
+        private void SendBgzt(T_JCXX jcxx)
+        {
+            log.WriteMyLog("开始回传报告状态.");
+
+            var statusId = GetNewStatusId();
+            var docId = GetNewDocId();
+
+            #region sqlInsertMain
+
+            string sqlInsertMain = $@"  insert into SGATE_STATUS_INFO
+                                        (PK,
+                                        PATIENT_ID,
+                                        PATIENT_DOMAIN_ID,
+                                        PAT_NAME,
+                                        PAT_CATEGORY,
+                                        PAT_CATEGORY_SYSTEM,
+                                        DOCUMENT_NAME,
+                                        DOCUMENT_UNIQUE_ID,
+                                        DOCUMENT_DOMAIN_ID,
+                                        PAY_LOAD_TYPE,
+                                        SUB_TYPE,
+                                        REQUEST_NUMBER,
+                                        REQUEST_DOMAIN,
+                                        ORDER_NUMBER,
+                                        ORDER_DOMAIN,
+                                        EVENT_STATUS,
+                                        EVENT_OPERATOR_ID,
+                                        EVENT_OPERATOR_NAME,
+                                        EVENT_CREATE_TIME
+                                        )
+                                        VALUES(
+                                        {statusId},--PK
+                                        '{jcxx.F_MZH.Trim() + jcxx.F_ZYH.Trim()}',--PATIENT_ID,
+                                        '{GetHisDomain(jcxx)}',--PATIENT_DOMAIN_ID,
+                                        '{jcxx.F_XM}',--PAT_NAME,
+                                        '{GetPatCategory(jcxx)}',--PAT_CATEGORY,
+                                        '2.16.840.1.113883.4.487.2.1.1.1.13',--PAT_CATEGORY_SYSTEM,
+                                        '',--DOCUMENT_NAME,
+                                        '{jcxx.F_BLH}',--DOCUMENT_UNIQUE_ID,
+                                        '2.16.840.1.113883.4.487.2.1.37',--DOCUMENT_DOMAIN_ID,
+                                        'XDS.LJPISBG',--PAY_LOAD_TYPE,
+                                        'ADD',--SUB_TYPE,
+                                        '{jcxx.F_BLH}',--REQUEST_NUMBER,
+                                        '2.16.840.1.113883.4.487.2.1.37',--REQUEST_DOMAIN,
+                                        '{jcxx.F_MZH.Trim() + jcxx.F_ZYH.Trim()}',--ORDER_NUMBER,
+                                        '2.16.840.1.113883.4.487.2.1.4',--ORDER_DOMAIN,
+                                        '{GetStatusCode(jcxx)}',--EVENT_STATUS,
+                                        '{yhmc}',--EVENT_OPERATOR_ID,
+                                        '{yhbh}',--EVENT_OPERATOR_NAME,
+                                        '{DateTime.Now}'--EVENT_CREATE_TIME
+                                        )
+                                        ";
+
+            #endregion
+
+            #region SqlInsertRepotExtend
+
+            string sqlInsertReportExtend1 = $@"insert into dgate_extend_id_info
+                                              (pk,
+                                               document_fk,
+                                               id,
+                                               domain_id)
+                                            values
+                                              (dgate_extend_id_info_sequence.nextval,--pk
+                                               '{docId}',--v_document_fk,
+                                               '{jcxx.F_ZYH.Trim() + jcxx.F_MZH.Trim()}',--v_id,
+                                               '{GetHisDomain(jcxx)}')--v_domain_id     ";
+
+            string sqlInsertReportExtend2 = $@"insert into dgate_extend_id_info
+                                              (pk,
+                                               document_fk,
+                                               id,
+                                               domain_id)
+                                            values
+                                              (dgate_extend_id_info_sequence.nextval,--pk
+                                               '{docId}',--v_document_fk,
+                                               '{jcxx.F_SQXH}',--v_id,
+                                               '{GetRelevanceDomain(jcxx)}')--v_domain_id     ";
+            string sqlInsertReportExtend3 = $@"insert into dgate_extend_id_info
+                                              (pk,
+                                               document_fk,
+                                               id,
+                                               domain_id)
+                                            values
+                                              (dgate_extend_id_info_sequence.nextval,--pk
+                                               '{docId}',--v_document_fk,
+                                               '{jcxx.F_BLH}',--v_id,
+                                               '2.16.840.1.113883.4.487.2.1.37')--v_domain_id     ";
+
+            #endregion
+
+            var lstSql = new List<string>()
+            {
+                sqlInsertMain,
+                sqlInsertReportExtend1,
+                //sqlInsertReportExtend2,
+                sqlInsertReportExtend3,
+            };
+
+            if (string.IsNullOrEmpty(jcxx.F_SQXH.Trim()) == false)
+                lstSql.Add(sqlInsertReportExtend2);
+
+            try
+            {
+                OdbcOracleHelper.ExecuteBatch(connStr, lstSql);
+            }
+            catch (Exception e)
+            {
+                log.WriteMyLog("回传报告状态异常:" + e);
+            }
+
+            log.WriteMyLog("成功回传报告状态.");
 
         }
 
@@ -154,6 +278,26 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
                 {
                     log.WriteMyLog("危急值上传失败:"+e);
                 }
+            }
+        }
+
+        private string GetStatusCode(T_JCXX jcxx)
+        {
+            switch (jcxx.F_BGZT)
+            {
+                case "已登记":
+                    return "21";
+                case "已制片":
+                    return "23";
+                case "已写报告":
+                    return "25";
+                case "报告延期":
+                    return "24";
+                case "已审核":
+                    return "26";
+                case "已取材":
+                    return "22";
+                default: return jcxx.F_BGZT;
             }
         }
 
@@ -1580,6 +1724,12 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
         {
             return OdbcOracleHelper.ExecuteScalar(connStr,
                 " select dgate_document_info_sequence.nextval from dual ");
+        }
+
+        private string GetNewStatusId()
+        {
+            return OdbcOracleHelper.ExecuteScalar(connStr,
+                " select SGATE_STATUS_INFO_SEQUENCE.nextval from dual ");
         }
 
         #region 辅助方法
