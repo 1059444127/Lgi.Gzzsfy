@@ -1692,8 +1692,7 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
         {
             string sql = $@"select count(*)
   from person p
- where trim(nvl(p.custom14,'')) = '{jcxx.F_MZH.Trim() + jcxx.F_ZYH.Trim()}' --门诊住院号
-    and p.identifier_id ='{jcxx.F_BLH}' --病理号不同的,按新病人注册
+ where p.identifier_id ='{jcxx.F_BLH}' --病理号不同的,按新病人注册
    and p.identifier_domain_id = '2.16.840.1.113883.4.487.2.1.37' ";
 
             var count = OdbcOracleHelper.ExecuteScalar(connStr, sql);

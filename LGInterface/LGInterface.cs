@@ -392,7 +392,7 @@ namespace LGInterface
 <PATIENT_ID>{patientNo}</PATIENT_ID>      
 ]]> ";
 
-                WebReferenceForDaiJiaTiJian.MessageRouteServiceSoapImplService sr =
+                MessageRouteServiceSoapImplService sr =
                     new MessageRouteServiceSoapImplService();
                 sr.Url = f.ReadString("广州中山附一", "体检服务url",
                     "http://168.168.252.112:14112/notice-server/services/MessageRouteServiceSoap");
