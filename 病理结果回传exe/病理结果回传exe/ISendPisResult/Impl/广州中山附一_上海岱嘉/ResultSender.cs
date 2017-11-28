@@ -33,10 +33,6 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
         private string yhmc="";
         private string yhbh = "";
 
-        T_JCXX jcxx = null;
-        T_BDBG bdbg = null;
-        T_BCBG bcbg = null;
-
         public ResultSender()
         {
             connStr = f.ReadString(ConfigSection, "ODBC报告回传", "");
@@ -82,6 +78,7 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
         public void SendResult(string pathoNo, ReportType reportType, string bgxh, EditType editType, PisAction pisAction,
             string yymc)
         {
+            T_JCXX jcxx = null;
             _reportType = reportType;
             _bgxh = bgxh;
             yhmc = f.ReadString("yh", "yhmc","");
@@ -90,8 +87,6 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
             try
             {
                 jcxx = new T_JCXX_DAL().GetModel(pathoNo);
-                bdbg = new T_BDBG_DAL().GetByBlhAndBgxh(pathoNo, _bgxh);
-                bcbg=new T_BCBG_DAL().GetByBlhAndBgxh(pathoNo, _bgxh);
                 TrimHelper.TrimAllPropertities(jcxx);
             }
             catch (Exception e)
@@ -253,10 +248,13 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
         /// <param name="jcxx"></param>
         private void SaveReport(T_JCXX jcxx)
         {
-            var bgzt = "";
-            if(jcxx?.F_BGZT =="已审核" || bdbg?.F_BD_BGZT=="已审核"||bcbg?.F_BC_BGZT=="已审核")
+            if (jcxx.F_BGZT == "已审核") //如果已审核,执行回传结果
             {
                 log.WriteMyLog("开始回传报告到集成平台!");
+
+//                //生成PDF并上传
+//                string base64Str = "";
+//                CreatePDF(jcxx.F_BLH,_bgxh,_reportType,false,ref base64Str,"");
 
                 //检查前置机中数据是否已经存在(重复审核)
                 //如果已存在,则不会重复注册病人,并且申请单和报告回传的标记是UPDATE
@@ -265,6 +263,7 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
                 SaveReport(jcxx, editType);
 
                 log.WriteMyLog("成功回传报告到集成平台!");
+
 
                 try
                 {
@@ -1735,46 +1734,44 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
 
         private string GetPathDiagXml(T_JCXX jcxx)
         {
-            string xml = "";
-            if (jcxx.F_BGZT == "已审核")
-            { 
-                xml+=$@"     <SubDiagnosis>
-			                    <DiagnosisTitle>病理报告</DiagnosisTitle>
-			                    <DiagnosisConclusion>{GetXmlStr(jcxx.F_BLZD)}</DiagnosisConclusion>
-			                    <DiagnosisTime>{GetXmlStr(jcxx.F_BGRQ)+":00"}</DiagnosisTime>
-			                    <DiagnosisCode>gc</DiagnosisCode>
-			                    <DiagnosisCodesystem></DiagnosisCodesystem>
-			                    <DiagnosisPerformer>
-                                    <Performer>
-				                        <PerformerName>{GetXmlStr(jcxx.F_BGYS)}</PerformerName>
-                                        <PerformerTypeCode>cg_czys</PerformerTypeCode>
-                                    </Performer>
-                                    <Performer>
-				                        <PerformerName>{GetXmlStr(jcxx.F_FZYS)}</PerformerName>
-                                        <PerformerTypeCode>cg_fzys</PerformerTypeCode>
-                                    </Performer>
-                                    <Performer>
-				                        <PerformerName>{GetXmlStr(jcxx.F_SHYS)}</PerformerName>
-                                        <PerformerTypeCode>cg_shys</PerformerTypeCode>
-                                    </Performer>
-			                    </DiagnosisPerformer>
-		                    </SubDiagnosis> ";
+            string xml = $@"		                        
+                        <SubDiagnosis>
+			                <DiagnosisTitle>病理报告</DiagnosisTitle>
+			                <DiagnosisConclusion>{GetXmlStr(jcxx.F_BLZD)}</DiagnosisConclusion>
+			                <DiagnosisTime>{GetXmlStr(jcxx.F_BGRQ)+":00"}</DiagnosisTime>
+			                <DiagnosisCode>gc</DiagnosisCode>
+			                <DiagnosisCodesystem></DiagnosisCodesystem>
+			                <DiagnosisPerformer>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(jcxx.F_BGYS)}</PerformerName>
+                                    <PerformerTypeCode>cg_czys</PerformerTypeCode>
+                                </Performer>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(jcxx.F_FZYS)}</PerformerName>
+                                    <PerformerTypeCode>cg_fzys</PerformerTypeCode>
+                                </Performer>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(jcxx.F_SHYS)}</PerformerName>
+                                    <PerformerTypeCode>cg_shys</PerformerTypeCode>
+                                </Performer>
+			                </DiagnosisPerformer>
+		                </SubDiagnosis> ";
 
-                xml += $@"		                        
-                            <SubDiagnosis>
-			                    <DiagnosisTitle>肉眼所见</DiagnosisTitle>
-			                    <DiagnosisConclusion>{GetXmlStr(jcxx.F_RYSJ)}</DiagnosisConclusion>
-			                    <DiagnosisTime>{GetXmlStr(jcxx.F_BGRQ) + ":00"}</DiagnosisTime>
-			                    <DiagnosisCode>cg_rysj</DiagnosisCode>
-			                    <DiagnosisCodesystem></DiagnosisCodesystem>
-			                    <DiagnosisPerformer>
-                                    <Performer>
-				                        <PerformerName>{GetXmlStr(jcxx.F_QCYS)}</PerformerName>
-                                        <PerformerTypeCode>cg_qcys</PerformerTypeCode>
-                                    </Performer>
-			                    </DiagnosisPerformer>
-		                    </SubDiagnosis> ";
-            }
+            xml += $@"		                        
+                        <SubDiagnosis>
+			                <DiagnosisTitle>肉眼所见</DiagnosisTitle>
+			                <DiagnosisConclusion>{GetXmlStr(jcxx.F_RYSJ)}</DiagnosisConclusion>
+			                <DiagnosisTime>{GetXmlStr(jcxx.F_BGRQ) + ":00"}</DiagnosisTime>
+			                <DiagnosisCode>cg_rysj</DiagnosisCode>
+			                <DiagnosisCodesystem></DiagnosisCodesystem>
+			                <DiagnosisPerformer>
+                                <Performer>
+				                    <PerformerName>{GetXmlStr(jcxx.F_QCYS)}</PerformerName>
+                                    <PerformerTypeCode>cg_qcys</PerformerTypeCode>
+                                </Performer>
+			                </DiagnosisPerformer>
+		                </SubDiagnosis> ";
+
             var bcbgList = new T_BCBG_DAL().GetListByBLH(jcxx.F_BLH);
             var bdbgList = new T_BDBG_DAL().GetListByBLH(jcxx.F_BLH);
 

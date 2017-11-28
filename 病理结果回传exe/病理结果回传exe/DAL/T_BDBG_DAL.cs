@@ -195,14 +195,6 @@ namespace SendPisResult.DAL
             return GetList($" and F_BLH='{BLH}' ");
         }
 
-	    public T_BDBG GetByBlhAndBgxh(string BLH,string Bgxh)
-	    {
-	        var lst =  GetList($" and F_BLH='{BLH}' and f_bd_bgxh='{Bgxh}' ");
-	        if (lst.Count > 0)
-	            return lst[0];
-	        return null;
-	    }
-
         #endregion  Method
         #region  MethodEx
 
