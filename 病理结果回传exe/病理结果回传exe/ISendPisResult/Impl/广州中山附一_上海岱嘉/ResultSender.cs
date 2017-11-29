@@ -100,6 +100,9 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
             if (jcxx.F_MZH.Trim() + jcxx.F_ZYH.Trim() == "")
                 jcxx.F_MZH = "SGD" + jcxx.F_BLH;
 
+            //回传报告状态
+            SendBgzt(jcxx);
+
             switch (pisAction)
             {
                 case PisAction.新登记:
@@ -119,8 +122,7 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
                 default:break;
             }
 
-            //回传报告状态
-            SendBgzt(jcxx);
+
         }
 
         /// <summary>
@@ -132,7 +134,6 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
             log.WriteMyLog("开始回传报告状态.");
 
             var statusId = GetNewStatusId();
-            var docId = GetNewDocId();
 
             #region sqlInsertMain
 
@@ -155,7 +156,10 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
                                         EVENT_STATUS,
                                         EVENT_OPERATOR_ID,
                                         EVENT_OPERATOR_NAME,
-                                        EVENT_CREATE_TIME
+                                        EVENT_CREATE_TIME,
+                                        EVENT_TIME,
+                                        DCM_STATUS,
+                                        EVENT_HIUP_STATUS
                                         )
                                         VALUES(
                                         {statusId},--PK
@@ -176,7 +180,10 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
                                         '{GetStatusCode(jcxx)}',--EVENT_STATUS,
                                         '{yhmc}',--EVENT_OPERATOR_ID,
                                         '{yhbh}',--EVENT_OPERATOR_NAME,
-                                        '{DateTime.Now}'--EVENT_CREATE_TIME
+                                        TO_TIMESTAMP('{DateTime.Now:yyyy-MM-dd HH:mm:ss}','yyyy-mm-dd hh24:mi:ss'),--EVENT_CREATE_TIME
+                                        TO_TIMESTAMP('{DateTime.Now:yyyy-MM-dd HH:mm:ss}','yyyy-mm-dd hh24:mi:ss'),--EVENT_TIME
+                                        0, --DCM_STATUS
+                                        0  --EVENT_HIUP_STATUS
                                         )
                                         ";
 
@@ -184,35 +191,35 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
 
             #region SqlInsertRepotExtend
 
-            string sqlInsertReportExtend1 = $@"insert into dgate_extend_id_info
+            string sqlInsertReportExtend1 = $@"insert into SGATE_EXTEND_ID_INFO
                                               (pk,
-                                               document_fk,
+                                               STATUS_FK,
                                                id,
                                                domain_id)
                                             values
-                                              (dgate_extend_id_info_sequence.nextval,--pk
-                                               '{docId}',--v_document_fk,
+                                              (SGATE_EXTEND_ID_INFO_SEQUENCE.nextval,--pk
+                                               '{statusId}',--STATUS_FK,
                                                '{jcxx.F_ZYH.Trim() + jcxx.F_MZH.Trim()}',--v_id,
                                                '{GetHisDomain(jcxx)}')--v_domain_id     ";
 
-            string sqlInsertReportExtend2 = $@"insert into dgate_extend_id_info
+            string sqlInsertReportExtend2 = $@"insert into SGATE_EXTEND_ID_INFO
                                               (pk,
-                                               document_fk,
+                                               STATUS_FK,
                                                id,
                                                domain_id)
                                             values
-                                              (dgate_extend_id_info_sequence.nextval,--pk
-                                               '{docId}',--v_document_fk,
+                                              (SGATE_EXTEND_ID_INFO_SEQUENCE.nextval,--pk
+                                               '{statusId}',--STATUS_FK,
                                                '{jcxx.F_SQXH}',--v_id,
                                                '{GetRelevanceDomain(jcxx)}')--v_domain_id     ";
-            string sqlInsertReportExtend3 = $@"insert into dgate_extend_id_info
+            string sqlInsertReportExtend3 = $@"insert into SGATE_EXTEND_ID_INFO
                                               (pk,
-                                               document_fk,
+                                               STATUS_FK,
                                                id,
                                                domain_id)
                                             values
-                                              (dgate_extend_id_info_sequence.nextval,--pk
-                                               '{docId}',--v_document_fk,
+                                              (SGATE_EXTEND_ID_INFO_SEQUENCE.nextval,--pk
+                                               '{statusId}',--STATUS_FK,
                                                '{jcxx.F_BLH}',--v_id,
                                                '2.16.840.1.113883.4.487.2.1.37')--v_domain_id     ";
 
@@ -2081,6 +2088,17 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
 
             return pdfName;
 
+        }
+
+        /// <summary>
+        /// DateTime时间格式转换为Unix时间戳格式
+        /// </summary>
+        /// <param name="time"> DateTime时间格式</param>
+        /// <returns>Unix时间戳格式</returns>
+        public static int GetTimeStamp(System.DateTime time)
+        {
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+            return (int)(time - startTime).TotalSeconds;
         }
 
 
