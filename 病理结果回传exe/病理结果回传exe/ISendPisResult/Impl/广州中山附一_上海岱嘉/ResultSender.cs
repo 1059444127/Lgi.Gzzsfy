@@ -101,7 +101,7 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉
                 jcxx.F_MZH = "SGD" + jcxx.F_BLH;
 
             //回传报告状态
-           // SendBgzt(jcxx);
+            SendBgzt(jcxx);
 
             switch (pisAction)
             {
