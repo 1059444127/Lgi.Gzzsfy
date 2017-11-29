@@ -12,8 +12,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using dbbase;
-using SendPisResult.ISendPisResult;
-using SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉;
 
 namespace SendPisResult.Util
 {
@@ -1497,12 +1495,12 @@ namespace SendPisResult.Util
                         }
                         if (ftpstatus == "Error")
                         {
-                            log.WriteMyLog("FTP下载图像出错！");
+                            SendPisResult.log.WriteMyLog("FTP下载图像出错！");
                             return false;
                         }
                         else
                         {
-                            if (f.ReadInteger("TX", "ZOOM", 0) == 1)
+                            if (f.ReadInteger("TX", "ZOOM", 1) == 1)
                             {
                                 int picx = f.ReadInteger("TX", "picx", 320);
                                 int picy = f.ReadInteger("TX", "picy", 240);
@@ -1510,15 +1508,17 @@ namespace SendPisResult.Util
                                 {
                                     prreport.txzoom(localpath + "\\" + txm, localpath + "\\" + txm, picx, picy);
                                 }
-                                catch
-                                { }
+                                catch(Exception txysException)
+                                {
+                                    SendPisResult.log.WriteMyLog("压缩图像时出现错误:"+txysException);
+                                }
                             }
                             txlbs = txlbs + "<Image INDEX=" + (char)34 + (i + 1).ToString() + (char)34 + ">" + localpath + "\\" + txm + "</Image>";
                         }
                     }
                     catch
                     {
-                        log.WriteMyLog("FTP下载图像出错！");
+                        SendPisResult.log.WriteMyLog("FTP下载图像出错！");
                         return false;
                     }
                 }
@@ -1526,6 +1526,7 @@ namespace SendPisResult.Util
             }
             else //共享下载方式
             {
+
                 if (txpath == "")
                 {
                     log.WriteMyLog("sz.ini txpath图像目录未设置");
