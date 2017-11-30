@@ -54,6 +54,10 @@ namespace ResendReport
             {
                 sqlWhere = sqlWhere + " " + txtSqlWhere.Text.Trim() + " ";
             }
+            if (chkSearchOnlyUnupload.Checked == true)
+            {
+                sqlWhere += $" and f_blh not in (select f_blh from T_BGCC_LOG ) ";
+            }
             
 
             _lstJcxx = (new T_JCXX_DAL()).GetBySqlWhere(sqlWhere);
@@ -207,6 +211,16 @@ namespace ResendReport
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
            Application.Exit();
+        }
+
+        private void btnClearLog_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("是否确定清空上传记录?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.No)
+                return;
+
+            aa.ExecuteSQL("delete T_BGCC_LOG");
+
+            MessageBox.Show("已清空上传记录.");
         }
     }
 }

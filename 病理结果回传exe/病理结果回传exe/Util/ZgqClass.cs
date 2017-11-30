@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Data;
 using System.Data.Odbc;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -4847,15 +4848,15 @@ namespace SendPisResult.Util
                 Image sourceImage = Image.FromFile(sor);
                 Image smallImage = ImageHelper.GetReducedImage(picx, picy, sourceImage);
                 sourceImage.Dispose();
-                smallImage.Save(dst);
+                smallImage.Save(dst, ImageFormat.Jpeg);
                 smallImage.Dispose();
             }
             catch (Exception e)
             {
                 SendPisResult.log.WriteMyLog("压缩图片时出现错误:"+e);
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
 
         public prreport()
