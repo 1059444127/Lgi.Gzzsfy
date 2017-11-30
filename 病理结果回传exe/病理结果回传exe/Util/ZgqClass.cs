@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
 using System.Data.Odbc;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -4841,15 +4842,22 @@ namespace SendPisResult.Util
         );
         public static bool txzoom(string sor, string dst, int picx, int picy)
         {
-            LoadDllapi dllloadz = new LoadDllapi();
-            if ((int)dllloadz.initPath("imagedll.dll") == 0)
+            try
             {
-                log.WriteMyLog("打印控件调用错误！");
+                Image sourceImage = Image.FromFile(sor);
+                Image smallImage = ImageHelper.GetReducedImage(picx, picy, sourceImage);
+                sourceImage.Dispose();
+                smallImage.Save(dst);
+                smallImage.Dispose();
+            }
+            catch (Exception e)
+            {
+                SendPisResult.log.WriteMyLog("压缩图片时出现错误:"+e);
                 return false;
             }
-            wt_zoominout xx = (wt_zoominout)dllloadz.InvokeMethod("wt_zoominout", typeof(wt_zoominout));
-            return xx(sor, dst, picx, picy);
+            return true;
         }
+
         public prreport()
         {
             string pathstr = Application.StartupPath + "\\sz.ini";

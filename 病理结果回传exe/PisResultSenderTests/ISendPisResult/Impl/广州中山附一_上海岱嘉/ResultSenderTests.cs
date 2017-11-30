@@ -2,9 +2,11 @@
 using SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SendPisResult.Util;
 
 namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉.Tests
 {
@@ -89,6 +91,18 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉.Test
                     throw;
                 }
             }
+        }
+
+        [TestMethod]
+        public void ZipImage()
+        {
+            var sor = @"C:\temp\201700017\ferrets_couple_grass_jump_playful_52405_3840x2400.jpg";
+            var dst = @"C:\temp\201700017\ferrets_couple_grass_jump_playful_52405_3840x2400.jpg";
+            Image sourceImage = Image.FromFile(sor);
+            Image smallImage = ImageHelper.GetReducedImage(320, 240, sourceImage);
+            sourceImage.Dispose();
+            smallImage.Save(dst);
+            smallImage.Dispose();
         }
 
     }

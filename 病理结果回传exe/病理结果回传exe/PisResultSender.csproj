@@ -86,6 +86,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="readini.cs" />
+    <Compile Include="Util\ImageHelper.cs" />
     <Compile Include="Util\Loaddll.cs" />
     <Compile Include="Util\DateTimeHelper.cs" />
     <Compile Include="Util\OdbcOracleHelper.cs" />
