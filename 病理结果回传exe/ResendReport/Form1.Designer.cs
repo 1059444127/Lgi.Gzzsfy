@@ -48,6 +48,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.上传状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.上传失败原因 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnClearLog = new System.Windows.Forms.Button();
+            this.chkSearchOnlyUnupload = new System.Windows.Forms.CheckBox();
             this.fBLKDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fBRLBDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fBLHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,19 +65,13 @@
             this.fNLDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fZYHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fMZHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.上传失败原因 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tJCXXBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnClearLog = new System.Windows.Forms.Button();
-            this.chkSearchOnlyUnupload = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tJCXXBindingSource)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tJCXXBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -96,7 +96,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(2188, 275);
+            this.panel1.Size = new System.Drawing.Size(2285, 275);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -258,7 +258,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 275);
             this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(2188, 1010);
+            this.panel2.Size = new System.Drawing.Size(2285, 1055);
             this.panel2.TabIndex = 1;
             // 
             // dataGridView1
@@ -288,7 +288,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 40;
-            this.dataGridView1.Size = new System.Drawing.Size(2188, 928);
+            this.dataGridView1.Size = new System.Drawing.Size(2285, 973);
             this.dataGridView1.TabIndex = 0;
             // 
             // 上传状态
@@ -297,6 +297,59 @@
             this.上传状态.HeaderText = "上传状态";
             this.上传状态.Name = "上传状态";
             this.上传状态.ReadOnly = true;
+            // 
+            // 上传失败原因
+            // 
+            this.上传失败原因.DataPropertyName = "上传失败原因";
+            this.上传失败原因.HeaderText = "上传失败原因";
+            this.上传失败原因.Name = "上传失败原因";
+            this.上传失败原因.ReadOnly = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblStatus);
+            this.panel3.Controls.Add(this.progressBar1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 973);
+            this.panel3.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(2285, 82);
+            this.panel3.TabIndex = 1;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(25, 12);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(630, 58);
+            this.progressBar1.Step = 5;
+            this.progressBar1.TabIndex = 0;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // btnClearLog
+            // 
+            this.btnClearLog.ForeColor = System.Drawing.Color.Blue;
+            this.btnClearLog.Location = new System.Drawing.Point(1779, 25);
+            this.btnClearLog.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClearLog.Name = "btnClearLog";
+            this.btnClearLog.Size = new System.Drawing.Size(282, 65);
+            this.btnClearLog.TabIndex = 13;
+            this.btnClearLog.Text = "清空上传记录";
+            this.btnClearLog.UseVisualStyleBackColor = true;
+            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
+            // 
+            // chkSearchOnlyUnupload
+            // 
+            this.chkSearchOnlyUnupload.AutoSize = true;
+            this.chkSearchOnlyUnupload.Location = new System.Drawing.Point(165, 213);
+            this.chkSearchOnlyUnupload.Name = "chkSearchOnlyUnupload";
+            this.chkSearchOnlyUnupload.Size = new System.Drawing.Size(351, 34);
+            this.chkSearchOnlyUnupload.TabIndex = 14;
+            this.chkSearchOnlyUnupload.Text = "只查询未上传过的记录";
+            this.chkSearchOnlyUnupload.UseVisualStyleBackColor = true;
             // 
             // fBLKDataGridViewTextBoxColumn
             // 
@@ -375,68 +428,15 @@
             this.fMZHDataGridViewTextBoxColumn.Name = "fMZHDataGridViewTextBoxColumn";
             this.fMZHDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // 上传失败原因
-            // 
-            this.上传失败原因.DataPropertyName = "上传失败原因";
-            this.上传失败原因.HeaderText = "上传失败原因";
-            this.上传失败原因.Name = "上传失败原因";
-            this.上传失败原因.ReadOnly = true;
-            // 
             // tJCXXBindingSource
             // 
             this.tJCXXBindingSource.DataSource = typeof(SendPisResult.Models.T_JCXX);
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.lblStatus);
-            this.panel3.Controls.Add(this.progressBar1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 928);
-            this.panel3.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(2188, 82);
-            this.panel3.TabIndex = 1;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(25, 12);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(630, 58);
-            this.progressBar1.Step = 5;
-            this.progressBar1.TabIndex = 0;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // btnClearLog
-            // 
-            this.btnClearLog.ForeColor = System.Drawing.Color.Blue;
-            this.btnClearLog.Location = new System.Drawing.Point(1779, 25);
-            this.btnClearLog.Margin = new System.Windows.Forms.Padding(2);
-            this.btnClearLog.Name = "btnClearLog";
-            this.btnClearLog.Size = new System.Drawing.Size(207, 65);
-            this.btnClearLog.TabIndex = 13;
-            this.btnClearLog.Text = "清空上传记录";
-            this.btnClearLog.UseVisualStyleBackColor = true;
-            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
-            // 
-            // chkSearchOnlyUnupload
-            // 
-            this.chkSearchOnlyUnupload.AutoSize = true;
-            this.chkSearchOnlyUnupload.Location = new System.Drawing.Point(165, 206);
-            this.chkSearchOnlyUnupload.Name = "chkSearchOnlyUnupload";
-            this.chkSearchOnlyUnupload.Size = new System.Drawing.Size(351, 34);
-            this.chkSearchOnlyUnupload.TabIndex = 14;
-            this.chkSearchOnlyUnupload.Text = "只查询未上传过的记录";
-            this.chkSearchOnlyUnupload.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2188, 1285);
+            this.ClientSize = new System.Drawing.Size(2285, 1330);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -449,10 +449,10 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tJCXXBindingSource)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tJCXXBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
