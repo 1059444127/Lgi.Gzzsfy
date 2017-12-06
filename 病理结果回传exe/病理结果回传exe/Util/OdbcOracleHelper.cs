@@ -69,7 +69,7 @@ namespace SendPisResult.Util
             OdbcTransaction trans = null;
             try
             {
-                log.WriteMyLog("Begin Executing Sql!");
+               // log.WriteMyLog("Begin Executing Sql!");
 
                 odbcconn.Open();
                 trans = odbcconn.BeginTransaction();
@@ -81,27 +81,27 @@ namespace SendPisResult.Util
                 {
                     string strComm = sql;
 #if DEBUG
-                    Console.WriteLine("exec batch:"+strComm);
+        //            Console.WriteLine("exec batch:"+strComm);
 #endif
 
-                    log.WriteMyLog("Executing Sql:" + strComm);
+                   // log.WriteMyLog("Executing Sql:" + strComm);
 
                     cmd.CommandText = sql;
                     cmd.ExecuteNonQuery();
                 }
                 trans.Commit();
-                log.WriteMyLog("Execute Batch Success!");
+               // log.WriteMyLog("Execute Batch Success!");
             }
             catch (Exception e)
             {
-                log.WriteMyLog("Execute Batch Error:" + e);
+               // log.WriteMyLog("Execute Batch Error:" + e);
 
                 trans?.Rollback();
                 throw;
             }
             finally
             {
-                log.WriteMyLog("Execute Batch Finish!");
+               // log.WriteMyLog("Execute Batch Finish!");
                 odbcconn.Close();
                 odbcconn.Dispose();
             }
