@@ -18,8 +18,8 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉.Test
         {
             //住院:201608928,bz,湖南省妇幼医院_广州邦弘
             //门诊:10152376,bz,湖南省妇幼医院_广州邦弘
-            var args = "172280,bz,广州中山附一_上海岱嘉";
-            var argsAdv = "172280^cg^1^old^save";
+            var args = "1717039,bz,广州中山附一_上海岱嘉";
+            var argsAdv = "1717039^cg^1^old^save";
             var values = args.Split(',');
             var hospName = values[2]; //医院名称
             var pathoNo = values[0]; //病理号
@@ -32,7 +32,7 @@ namespace SendPisResult.ISendPisResult.Impl.广州中山附一_上海岱嘉.Test
         [TestMethod()]
         public  void  CallSendResultPlus()
         {
-            var args = "201700005^cg^1^old^save";
+            var args = "1717039^cg^1^old^save";
 
             if (args.IndexOf("^") > -1)
             {
