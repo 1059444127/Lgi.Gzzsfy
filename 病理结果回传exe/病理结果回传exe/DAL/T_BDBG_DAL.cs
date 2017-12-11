@@ -192,7 +192,7 @@ namespace SendPisResult.DAL
 
         public List<T_BDBG> GetListByBLH(string BLH)
         {
-            return GetList($" and F_BLH='{BLH}' ");
+            return GetList($" and F_BLH='{BLH}' and f_bd_bgzt='已审核' ");
         }
 
         #endregion  Method

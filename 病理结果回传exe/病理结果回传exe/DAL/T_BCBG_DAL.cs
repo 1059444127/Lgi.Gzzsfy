@@ -184,7 +184,7 @@ namespace Maticsoft.DAL
 
         public List<T_BCBG> GetListByBLH(string BLH)
         {
-            return GetList($" and F_BLH='{BLH}' ");
+            return GetList($" and F_BLH='{BLH}' and f_bc_bgzt='已审核' ");
         }
     }
 }
